@@ -1,6 +1,5 @@
 # IITG-Form-Creating-Portal
-to make custom forms with variable no of fields like google forms along with features of webmail authentication and file upload
-
+a Form creating portal in DJANGO framework with user having full control over the form fields and fields type, option of file upload, what content is displayed and IITG webmail authentication for enhanced security. The portal can be utilised to automate tasks like feedback collection etc without making a separate portal for it.
 ___
 
 ## Requirements
