@@ -1,0 +1,82 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="description" content="">
+    <link href="{% static 'forms/icons/material-icons.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'forms/css/materialize.min.css' %}">
+    <script src="{% static 'forms/js/jquery.min.js' %}"></script>
+    <script src="{% static 'forms/js/materialize.min.js' %}"></script>
+    <title>Fields Details</title>
+</head>
+<body>
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo ">IITG Form Portal</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/forms" onclick="return confirm('Are you sure you want to delete this?')">Dashboard</a>
+                </li>
+                <li><a href="/forms/logout">LogOut</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<main>
+    <div class="row">
+        <div class="col offset-s1 s10">
+            <h3 class="center"><span>Create Fields for your Form:</span></h3>
+            <div class="container form-group">
+                <div>
+                    <ul>
+                        {% for error in form.non_field_errors %}
+                            <li class="red-text">
+                                <u>{{ error }}</u>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div>
+                        {% for value in argsdict.values %}
+                            <div>
+                                <h5 class="blue-text text-darken-2">Enter the details for field{{ forloop.counter }}</h5>
+                            </div>
+{#                            <div class="">#}
+{#                                {{ value.as_p }}#}
+{#                            </div>#}
+                            {% include 'field_mdl.html' with field=value.label %}
+                            {% include 'field_mdl.html' with field=value.field_type %}
+                            {% include 'field_mdl.html' with field=value.choices %}
+                            {% include 'field_mdl.html' with field=value.default %}
+                            {% include 'field_mdl.html' with field=value.placeholder_text %}
+                            {% include 'field_mdl.html' with field=value.help_text %}
+                            {% include 'field_mdl.html' with field=value.required %}
+                        {% endfor %}
+                    </div>
+                    <div class="row">
+                        <div class="center">
+                            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                                <i class="material-icons right">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+<script>
+    $(document).ready(function () {
+        $('select').material_select();
+    });
+</script>
+</html>

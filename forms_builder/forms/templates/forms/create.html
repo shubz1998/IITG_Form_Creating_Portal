@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="description" content="">
+    <link href="{% static 'forms/icons/material-icons.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'forms/css/materialize.min.css' %}">
+    <script src="{% static 'forms/js/jquery.min.js' %}"></script>
+    <script src="{% static 'forms/js/materialize.min.js' %}"></script>
+    <title>Create Form</title>
+
+</head>
+
+<body>
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo ">IITG Form Portal</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/forms">Dashboard</a></li>
+                <li class="active"><a href="/forms/create">Create Form</a></li>
+                <li><a href="/forms/logout">LogOut</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<main>
+    <div class="container">
+        <div class="container form-group">
+                <div>
+                    <ul>
+                        {% for error in form.non_field_errors %}
+                            <li class="red-text">
+                                <u>{{ error }}</u>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <form method="post" class="col s12" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% include 'field_mdl.html' with field=form.title %}
+                    {% include 'field_mdl.html' with field=form.intro %}
+                    {% include 'field_mdl.html' with field=form.response %}
+                    {% include 'field_mdl.html' with field=form.publish_date %}
+                    {% include 'field_mdl.html' with field=form.expiry_date %}
+                    {% include 'field_mdl.html' with field=form.no_of_fields %}
+                    {% include 'field_mdl.html' with field=form.login_required %}
+
+                    <div class='row center'>
+                    <div class="col-xs-12">
+                        <input style="display: none" name="next" value="{{ next }}"/>
+                         <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+                </form>
+{#            </div>#}
+        </div>
+    </div>
+    {#    <div class="col l4 m2 hide-on-small-only"></div>#}
+</main>
+<footer></footer>
+
+</body>
+</html>

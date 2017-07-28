@@ -1,0 +1,56 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="description" content="">
+    <link href="{% static 'forms/icons/material-icons.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'forms/css/materialize.min.css' %}">
+    <script src="{% static 'forms/js/jquery.min.js' %}"></script>
+    <script src="{% static 'forms/js/materialize.min.js' %}"></script>
+    <title>Dashboard</title>
+</head>
+
+<body>
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo ">IITG Form Portal</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li class="active"><a href="">Dashboard</a></li>
+                <li><a href="create">Create Form</a></li>
+                <li><a href="/forms/logout">LogOut</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="center">
+    <h3>Your past created forms</h3>
+    <div class="container">
+        <table class="bordered highlight centered">
+            {% for form in forms %}
+                <tr>
+                    <td>
+                        <p><a href="{{ form.get_absolute_url }}">{{ form.title }}</a></p>
+                    </td>
+                    <td>
+                        <a href="{{ form.id }}/exportcsv" class="waves-effect waves-light btn">Download CSV</a>
+
+                    </td>
+                <td>
+                        <a href="/forms/{{ form.slug }}/delete" class="waves-effect waves-light btn">Delete Form</a>
+                </td>
+
+                </tr>
+            {% empty %}
+                <p>No forms created.</p>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+</body>
+</html>

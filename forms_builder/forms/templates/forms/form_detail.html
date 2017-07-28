@@ -1,0 +1,27 @@
+{% load forms_builder_tags %}
+{% load static %}
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="description" content="">
+    <link href="{% static 'forms/icons/material-icons.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'forms/css/materialize.min.css' %}">
+    <script src="{% static 'forms/js/jquery.min.js' %}"></script>
+    <script src="{% static 'forms/js/materialize.min.js' %}"></script>
+    <title>Form</title>
+
+</head>
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo ">IITG Form Portal</a>
+        </div>
+    </nav>
+</div>
+<body>
+{% render_built_form form %}
+</body>
+</html>
